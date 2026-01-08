@@ -1,15 +1,13 @@
 #!/bin/bash
 IP_UMAMI="172.24.136.6"
-IP_BACKEND="172.27.162.251"
-IP_FRONT="172.27.175.213"
+IP_BACKEND="172.24.140.14"
+IP_FRONT="172.24.138.203"
 PB_USER=$(whoami)
 PB_INSTALL_DIR="/usr/local/bin"
 PB_DATA_DIR="/home/$PB_USER/pocketbase_data"
 ADMIN_EMAIL="mail@gmail.com"
 ADMIN_PASS="useruser"
 TMUX_SESSION="pocketbase"
-
-source ./var.sh
 
 wget https://github.com/pocketbase/pocketbase/releases/download/v0.35.0/pocketbase_0.35.0_linux_amd64.zip -O pocketbase.zip
 echo "-- dl pocketbase --"
@@ -32,4 +30,3 @@ echo "-- serve start --"
 echo "URL console : http://$IP_BACKEND:4242/_/"
 echo "URL api : http://$IP_BACKEND:4242/api/"
 echo "Nom de la session tmux : $TMUX_SESSION"
-

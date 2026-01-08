@@ -1,14 +1,12 @@
 #!/bin/bash
 IP_UMAMI="172.24.136.6"
-IP_BACKEND="172.27.162.251"
-IP_FRONT="172.27.175.213"
+IP_BACKEND="172.24.140.14"
+IP_FRONT="172.24.138.203"
 PORT_BACKEND="4242"
 TMUX_SESSION="front"
 PROJECT="sdv-b2b-blog-example"
 IP_BACKEND="172.27.162.251"
 IP_FRONT="172.27.175.213"
-
-source ./auto.sh
 
 echo "install outils"
 sudo apt update
@@ -32,5 +30,4 @@ echo "install node"
 npm i
 echo "start node"
 tmux new-session -d -s $TMUX_SESSION "npm run dev"
-
 echo "Adresse internet : http://$IP_FRONT:5173"

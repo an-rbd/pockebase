@@ -1,9 +1,7 @@
 #!/bin/bash
 IP_UMAMI="172.24.136.6"
-IP_BACKEND="172.27.162.251"
-IP_FRONT="172.27.175.213"
-
-source ./var.sh
+IP_BACKEND="172.24.140.14"
+IP_FRONT="172.24.138.203"
 
 sudo apt update
 sudo apt get wget tmux git -y
