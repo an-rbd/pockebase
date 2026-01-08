@@ -6,11 +6,8 @@ PB_DATA_DIR="/home/$PB_USER/pocketbase_data"
 ADMIN_EMAIL="mail@gmail.com"
 ADMIN_PASS="useruser"
 TMUX_SESSION="pocketbase"
-IP_BACKEND="172.27.162.251"
-IP_FRONT="172.27.175.213"
 
-source ./auto.sh
-
+source ./var.sh
 
 wget https://github.com/pocketbase/pocketbase/releases/download/v0.35.0/pocketbase_0.35.0_linux_amd64.zip -O pocketbase.zip
 echo "-- dl pocketbase --"
