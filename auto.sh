@@ -8,13 +8,14 @@ set -e
 cd pockebase
 
 echo "Install BACKEND"
-./bash/setup-pocketbase.sh
+ssh nom@ip -p 4222 'bash -s' < ./setup-pocketbase.sh
 
 echo "Install FRONTEND"
-./bash/app.sh
+ssh nom@ip -p 4222 'bash -s' < ./app.sh
 
 echo "Install UNAMI"
-./bash/install-docker.sh
-./bash/unami.sh
+ssh nom@ip -p 4222 'bash -s' < ./install-docker.sh
+sleep 120
+ssh nom@ip -p 4222 'bash -s' < ./unami.sh
 
 echo "Service pret a l'utilisation"
