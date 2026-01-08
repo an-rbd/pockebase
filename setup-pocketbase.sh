@@ -1,7 +1,7 @@
 #!/bin/bash
-IP_UMAMI="172.24.136.6"
-IP_BACKEND="172.24.140.14"
-IP_FRONT="172.24.138.203"
+IP_UMAMI="172.21.72.104"
+IP_BACKEND="172.21.68.177"
+IP_FRONT="172.21.69.86"
 PB_USER=$(whoami)
 PB_INSTALL_DIR="/usr/local/bin"
 PB_DATA_DIR="/home/$PB_USER/pocketbase_data"
@@ -9,24 +9,31 @@ ADMIN_EMAIL="mail@gmail.com"
 ADMIN_PASS="useruser"
 TMUX_SESSION="pocketbase"
 
+echo "###########################################################################################################"
+echo "Téléchargement de Pocketbase..."
 wget https://github.com/pocketbase/pocketbase/releases/download/v0.35.0/pocketbase_0.35.0_linux_amd64.zip -O pocketbase.zip
-echo "-- dl pocketbase --"
+echo "Téléchargement terminé."
+echo "Décompression de l'archive..."
 unzip pocketbase.zip -d pocketbase
-echo "-- unzip --"
+echo "Décompression terminée."
 cd pocketbase
 chmod +x pocketbase
-echo "-- execution fichier --"
+echo "Création du compte administrateur..."
 ./pocketbase superuser create $ADMIN_EMAIL $ADMIN_PASS
-echo "-- creation admin --"
+echo "Compte administrateur créé avec succès."
+echo "Recupération des fichier de migration..."
 sudo git clone https://github.com/nexus9111/migrations-sdv-b2b/
-echo "-- clon github --"
+echo "Déplacement des fichiers de migration..."
 sudo mv migrations-sdv-b2b/ pb_migrations
-echo "-- creation migration --"
+echo "Téléchargement et déplacement terminé."
+echo "Debut de la migration de la base de données..."
 ./pocketbase migrate
-echo "-- migrate --"
+echo "Migration terminée."
+echo "Lancement de la session tmux pour Pocketbase..."
 tmux new-session -d -s $TMUX_SESSION ./pocketbase serve --http=$IP_BACKEND:4242
-echo "-- session tmuux --"
-echo "-- serve start --"
-echo "URL console : http://$IP_BACKEND:4242/_/"
-echo "URL api : http://$IP_BACKEND:4242/api/"
-echo "Nom de la session tmux : $TMUX_SESSION"
+echo "###########################################################################################################"
+echo "Installation de Pocketbase terminée avec succès."
+echo "Indications d'accès :"
+echo " - URL console : http://$IP_BACKEND:4242/_/"
+echo " - URL api : http://$IP_BACKEND:4242/api/"
+echo " - Nom de la session tmux : $TMUX_SESSION"
