@@ -3,8 +3,10 @@ PB_INSTALL_DIR="/usr/local/bin"
 PB_DATA_DIR="/home/$PB_USER/pocketbase_data"
 ADMIN_EMAIL="mail@gmail.com"
 ADMIN_PASS="useruser"
-IP_MACHINE="172.27.162.251"
 TMUX_SESSION="pocketbase"
+
+source ./auto.sh
+
 
 wget https://github.com/pocketbase/pocketbase/releases/download/v0.35.0/pocketbase_0.35.0_linux_amd64.zip -O pocketbase.zip
 echo "-- dl pocketbase --"
@@ -21,9 +23,10 @@ sudo mv migrations-sdv-b2b/ pb_migrations
 echo "-- creation migration --"
 ./pocketbase migrate
 echo "-- migrate --"
-tmux new-session -d -s $TMUX_SESSION ./pocketbase serve --http=$IP_MACHINE:4242
+tmux new-session -d -s $TMUX_SESSION ./pocketbase serve --http=$IP_BACKEND:4242
 echo "-- session tmuux --"
 echo "-- serve start --"
-echo "URL console : http://$IP_MACHINE:4242/_/"
-echo "URL api : http://$IP_MACHINE:4242/api/"
+echo "URL console : http://$IP_BACKEND:4242/_/"
+echo "URL api : http://$IP_BACKEND:4242/api/"
 echo "Nom de la session tmux : $TMUX_SESSION"
+
