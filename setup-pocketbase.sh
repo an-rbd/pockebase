@@ -1,5 +1,7 @@
 #!/bin/bash
-
+IP_UMAMI="172.24.136.6"
+IP_BACKEND="172.27.162.251"
+IP_FRONT="172.27.175.213"
 PB_USER=$(whoami)
 PB_INSTALL_DIR="/usr/local/bin"
 PB_DATA_DIR="/home/$PB_USER/pocketbase_data"
