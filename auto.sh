@@ -2,18 +2,19 @@
 
 git clone https://github.com/an-rbd/pockebase.git
 
-cd pockebase
+cd /pockebase/bash
 chmod +x *.sh
 set -e
+cd pockebase
 
 echo "Install BACKEND"
-./setup-pocketbase.sh
+./bash/setup-pocketbase.sh
 
 echo "Install FRONTEND"
-./app.sh
+./bash/app.sh
 
 echo "Install UNAMI"
-./install-docker.sh
-./unami.sh
+./bash/install-docker.sh
+./bash/unami.sh
 
 echo "Service pret a l'utilisation"
