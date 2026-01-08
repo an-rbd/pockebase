@@ -1,15 +1,31 @@
 IP_BACKEND="172.27.162.251"
+IP_FRONT="172.27.175.213"
 PORT_BACKEND="4242"
 TMUX_SESSION="front"
+PROJECT="sdv-b2b-blog-example"
 
+
+echo "install outils"
+sudo apt update
 sudo apt install wget tmux git -y
-curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-source ~/.bashrc
+echo "installation node"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+export NVM_DIR="$HOME/.nvm"
+source "$NVM_DIR/nvm.sh"
 nvm install 24
 nvm use 24
-nvm alias default 24
 node -v
+echo "import application "
 git clone https://github.com/nexus9111/sdv-b2b-blog-example.git
-echo "VITE_BACKEND_URL=http://$IP_BACKEND:$PORT_BACKEND" > .env
+cd "$PROJECT" || exit 1
+echo "modif .env"
+echo "VITE_BACKEND_URL=http://${IP_BACKEND}:${PORT_BACKEND}" > .env
+tmux has-session -t $TMUX_SESSION 2>/dev/null && tmux kill-session -t $TMUX_SESSION
+tmux new-session -d -s $TMUX_SESSION \
+cat .env
+echo "install node"
 npm i
-tmux new-session -d -s $TMUX_SESSION npm run dev
+echo "start node"
+tmux new-session -d -s $TMUX_SESSION "npm run dev"
+
+echo "Adresse internet : http://$IP_FRONT:5173"
